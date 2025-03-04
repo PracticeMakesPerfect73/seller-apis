@@ -104,7 +104,6 @@ def create_stocks(watch_remnants, offer_ids, warehouse_id):
                 }
             )
             offer_ids.remove(str(watch.get("Код")))
-    # Добавим недостающее из загруженного:
     for offer_id in offer_ids:
         stocks.append(
             {
@@ -171,22 +170,16 @@ def main():
 
     watch_remnants = download_stock()
     try:
-        # FBS
         offer_ids = get_offer_ids(campaign_fbs_id, market_token)
-        # Обновить остатки FBS
         stocks = create_stocks(watch_remnants, offer_ids, warehouse_fbs_id)
         for some_stock in list(divide(stocks, 2000)):
             update_stocks(some_stock, campaign_fbs_id, market_token)
-        # Поменять цены FBS
         upload_prices(watch_remnants, campaign_fbs_id, market_token)
 
-        # DBS
         offer_ids = get_offer_ids(campaign_dbs_id, market_token)
-        # Обновить остатки DBS
         stocks = create_stocks(watch_remnants, offer_ids, warehouse_dbs_id)
         for some_stock in list(divide(stocks, 2000)):
             update_stocks(some_stock, campaign_dbs_id, market_token)
-        # Поменять цены DBS
         upload_prices(watch_remnants, campaign_dbs_id, market_token)
     except requests.exceptions.ReadTimeout:
         print("Превышено время ожидания...")
