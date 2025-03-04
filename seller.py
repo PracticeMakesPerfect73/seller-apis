@@ -172,11 +172,9 @@ def main():
     try:
         offer_ids = get_offer_ids(client_id, seller_token)
         watch_remnants = download_stock()
-        # Обновить остатки
         stocks = create_stocks(watch_remnants, offer_ids)
         for some_stock in list(divide(stocks, 100)):
             update_stocks(some_stock, client_id, seller_token)
-        # Поменять цены
         prices = create_prices(watch_remnants, offer_ids)
         for some_price in list(divide(prices, 900)):
             update_price(some_price, client_id, seller_token)
