@@ -144,7 +144,7 @@ def create_stocks(watch_remnants, offer_ids, warehouse_id):
     Args:
         watch_remnants (list): Список товаров с их количеством.
         offer_ids (list): Список артикулов товаров, загруженных на Маркет.
-        warehouse_id (int): id склада.
+        warehouse_id (str): id склада.
 
     Returns:
         list: Список остатков товаров в формате API Яндекс Маркета.
@@ -258,7 +258,7 @@ async def upload_stocks(watch_remnants, campaign_id,
         watch_remnants (list): Список товаров с остатками.
         campaign_id (str): id кампании.
         market_token (str): Токен доступа к API.
-        warehouse_id (int): id склада.
+        warehouse_id (str): id склада.
 
     Returns:
         tuple: Кортеж из двух элементов:
